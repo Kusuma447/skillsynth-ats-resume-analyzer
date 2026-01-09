@@ -18,4 +18,4 @@ SkillSynth is a web-based ATS Resume Analyzer designed to help students and fres
 3. ATS score and match percentage are returned
 
 ## Demo
-(Add demo video link here)
+https://drive.google.com/file/d/1RevYsQdK4kxKXQwGVmerlAk_Mo3UByUh/view?usp=drivesdk
