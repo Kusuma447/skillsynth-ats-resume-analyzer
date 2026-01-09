@@ -26,7 +26,8 @@ A web-based ATS Resume Analyzer that provides:
 2. Backend analyzes keywords
 3. ATS score and match percentage are returned
 
-## Demo
-https://drive.google.com/file/d/1RevYsQdK4kxKXQwGVmerlAk_Mo3UByUh/view?usp=drivesdk
-🎥 Demo Video: Shows full UI flow and resume analysis results.  
-📁 Source Code: Available in this GitHub repository.
+## 🔗 Project Links
+
+- 📂 GitHub Repository:   https://github.com/Kusuma447/skillsynth-ats-resume-analyzer/tree/main
+- 🎥 Demo Video:  https://drive.google.com/file/d/1RevYsQdK4kxKXQwGVmerlAk_Mo3UByUh/view?usp=drivesdk  
+
