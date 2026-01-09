@@ -28,3 +28,5 @@ A web-based ATS Resume Analyzer that provides:
 
 ## Demo
 https://drive.google.com/file/d/1RevYsQdK4kxKXQwGVmerlAk_Mo3UByUh/view?usp=drivesdk
+🎥 Demo Video: Shows full UI flow and resume analysis results.  
+📁 Source Code: Available in this GitHub repository.
