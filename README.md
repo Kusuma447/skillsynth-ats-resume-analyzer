@@ -1,6 +1,15 @@
 # SkillSynth – ATS Resume Analyzer
 
 SkillSynth is a web-based ATS Resume Analyzer designed to help students and freshers understand how well their resumes align with job descriptions.
+## Problem
+Students and freshers struggle to understand how ATS systems evaluate resumes.
+SkillSynth helps them analyze resumes against job descriptions instantly.
+
+## Solution
+A web-based ATS Resume Analyzer that provides:
+- ATS score
+- Job match percentage
+- Missing keywords
 
 ## Features
 - ATS score calculation
