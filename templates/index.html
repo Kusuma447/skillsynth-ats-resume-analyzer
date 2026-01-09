@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ATS Resume Analyzer</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+/* ===== GLOW BORDER ===== */
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 3px;
+  border-radius: 30px;
+  background: linear-gradient(120deg,#22d3ee,#a78bfa,#f472b6,#22d3ee);
+  background-size: 300% 300%;
+  animation: glowMove 8s infinite linear;
+}
+
+.container {
+  background: rgba(2,6,23,0.92);
+  border-radius: 28px;
+  padding: 52px;
+  color: #e5e7eb;
+}
+
+/* ===== HEADER ===== */
+h1 {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg,#22d3ee,#a78bfa,#f472b6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  text-align: center;
+  opacity: 0.85;
+  margin-bottom: 6px;
+}
+
+.student-line {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.75;
+  margin-bottom: 45px;
+}
+
+/* ===== FORM ===== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+}
+
+textarea {
+  min-height: 180px;
+}
+
+/* ===== BUTTON ===== */
+button {
+  margin: 45px auto 0;
+  display: block;
+  padding: 18px 65px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 700;
+  color: #020617;
+  background: linear-gradient(135deg,#22d3ee,#a78bfa,#f472b6);
+  box-shadow: 0 0 40px rgba(167,139,250,0.6);
+  transition: 0.4s;
+}
+
+button:hover {
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 0 70px rgba(244,114,182,0.9);
+}
+
+/* ===== LOADING ===== */
+.loading {
+  display: none;
+  text-align: center;
+  margin-top: 35px;
+  color: #a78bfa;
+  font-weight: 600;
+}
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top: 4px solid #a78bfa;
+  border-radius: 50%;
+  margin: 15px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== RESULTS ===== */
+.results {
+  display: none;
+  margin-top: 60px;
+  animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SCORE CARDS ===== */
+.score-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
+  gap: 30px;
+}
+
+.card {
+  background: linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02));
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 0 35px rgba(0,0,0,0.6);
+}
+
+.score {
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(90deg,#22d3ee,#a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.progress-bar {
+  margin-top: 18px;
+  height: 18px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg,#22d3ee,#f472b6);
+  transition: width 1.6s ease;
+}
+
+/* ===== BREAKDOWNS ===== */
+.breakdown {
+  margin-top: 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+  margin-top: 45px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 26px;
+  padding: 34px;
+}
+
+li {
+  margin-bottom: 12px;
+}
+
+/* ===== BADGE ===== */
+.badge {
+  margin-top: 35px;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 50px;
+  font-weight: 700;
+  background: linear-gradient(135deg,#22d3ee,#f472b6);
+  color: #020617;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+<div class="container">
+
+<h1>ATS Resume Analyzer</h1>
+<div class="subtitle">AI-powered resume intelligence with ATS precision</div>
+<div class="student-line">Analysis optimized for student & fresher resumes</div>
+
+<div class="form-grid">
+  <div>
+    <label>Upload Resume (PDF)</label>
+    <input type="file">
+  </div>
+  <div>
+    <label>Job Description</label>
+    <textarea placeholder="Paste job description here..."></textarea>
+  </div>
+</div>
+
+<button onclick="analyze()">Analyze Resume</button>
+
+<div class="loading" id="loading">
+  <div class="spinner"></div>
+  Analyzing resume against ATS rules…
+</div>
+
+<div class="results" id="results">
+
+<div class="score-cards">
+  <div class="card">
+    <h3>ATS Score</h3>
+    <div class="score">78 / 100</div>
+    <div class="progress-bar"><div class="progress" id="atsBar"></div></div>
+
+    <!-- 🟡 ATS SCORE BREAKDOWN -->
+    <div class="breakdown">
+      <strong>ATS Score Breakdown</strong><br>
+      Formatting & Structure: <b>25 / 30</b><br>
+      Keyword Match: <b>28 / 40</b><br>
+      Section Completeness: <b>15 / 20</b><br>
+      Readability: <b>10 / 10</b>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Job Match</h3>
+    <div class="score">72%</div>
+    <div class="progress-bar"><div class="progress" id="matchBar"></div></div>
+
+    <div class="breakdown">
+      <strong>Job Match Breakdown</strong><br>
+      Required skills matched: <b>6 / 9</b><br>
+      Missing skills: <b>Docker, AWS</b><br>
+      Experience level: <b>Junior-friendly</b>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+<h3>🔴 Issues Found</h3>
+<ul>
+<li>Missing keywords: Python, SQL, REST APIs</li>
+<li>ATS-unfriendly formatting detected</li>
+<li>No measurable project impact</li>
+</ul>
+</div>
+
+<div class="section">
+<h3>🟢 Suggestions</h3>
+<ul>
+<li>Add role-specific keywords from JD</li>
+<li>Quantify project outcomes</li>
+<li>Use clean, bullet-based layouts</li>
+</ul>
+</div>
+
+<div class="badge">🎓 Student Mode Enabled</div>
+
+</div>
+</div>
+
+<script>
+async function analyze() {
+  const jd = document.querySelector("textarea").value;
+
+  if (!jd.trim()) {
+    alert("Please enter job description");
+    return;
+  }
+
+  document.getElementById("loading").style.display = "block";
+  document.getElementById("results").style.display = "none";
+
+  const res = await fetch("/analyze", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ job_desc: jd })
+  });
+
+  const data = await res.json();
+
+  document.getElementById("loading").style.display = "none";
+  document.getElementById("results").style.display = "block";
+
+  document.querySelector(".score").innerText = data.ats_score + " / 100";
+  document.querySelectorAll(".score")[1].innerText = data.match_percentage + "%";
+
+  document.getElementById("atsBar").style.width = data.ats_score + "%";
+  document.getElementById("matchBar").style.width = data.match_percentage + "%";
+}
+</script>
+</body>
+</html>
